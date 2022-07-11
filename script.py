@@ -2,6 +2,7 @@
 # Alunos:																				#
 # 	Laianna Lana Virginio da Silva - llvs2@cin.ufpe.br      							#
 # 	Lucas Natan Correia Couri - lncc2@cin.ufpe.br   									#
+# 	Priscilla Amarante de Lima - pal4@cin.ufpe.br   									#
 #########################################################################################
 
 #from pyspark.context import SparkContext

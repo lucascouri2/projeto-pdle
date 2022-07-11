@@ -1,8 +1,13 @@
 #########################################################################################
 # Alunos:																				#
-# 	Laianna Lana Virginio da Silva** - *llvs2@cin.ufpe.br*								#
-# 	Lucas Natan Correia Couri** - *lncc2@cin.ufpe.br*									#
+# 	Laianna Lana Virginio da Silva - llvs2@cin.ufpe.br      							#
+# 	Lucas Natan Correia Couri - lncc2@cin.ufpe.br   									#
 #########################################################################################
+
+#from pyspark.context import SparkContext
+#from pyspark.sql.session import SparkSession
+#sc = SparkContext('local')
+#spark = SparkSession(sc)
 
 #########################################################################################
 # Bibliotecas																			#
@@ -10,8 +15,9 @@
 from pyspark.ml.classification import RandomForestClassifier
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 
-from pyspark.ml.feature import StringIndexer
-
+from pyspark.ml.feature import StringIndexer, IndexToString
+from pyspark.ml import Pipeline
+from pyspark.shell import spark
 
 #########################################################################################
 SEED = 42
@@ -20,7 +26,7 @@ SEED = 42
 
 #########################################################################################
 # Carrega o arquivo
-pt7_parquet = spark.read.format("parquet").load(f"./pt7-hash.parquet")
+pt7_parquet = spark.read.format("parquet").load(f"/bigdata/pt7-hash.parquet")
 
 # Indexa as labels
 label_indexador = StringIndexer(inputCol = "label", outputCol = "indexedLabel").fit(pt7_parquet)
@@ -58,7 +64,13 @@ f1 = evaluator_f1.evaluate(predicao)
 
 
 #########################################################################################
-# Salva o modelo_rf																		#
+# Salva o modelo_rf e as métricas de avaliação											#
 #########################################################################################
-modelo.save(f"/modelo_rf")
-#modelo.save(f"hdfs://master:8020/modelo_rf")
+#salva o modelo rf
+#modelo.save(f"/projeto/modelo_rf")
+modelo.save(f"hdfs://master:8020/bigdata/modelo_rf2")
+
+#salva as métricas
+arquivo = open("projeto/metricas.txt", "w")
+arquivo.write(f"acucacia,f1\n{acuracia},{f1}")
+arquivo.close()

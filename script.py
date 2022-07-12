@@ -59,12 +59,20 @@ evaluator_f1 = MulticlassClassificationEvaluator(labelCol = "indexedLabel", pred
 f1 = evaluator_f1.evaluate(predicao)
 
 # Precisão
-evaluator_precisao = MulticlassClassificationEvaluator(labelCol = "indexedLabel", predictionCol = "prediction", metricName = "precision")
-precisao = evaluator_precisao.evaluate(predicao)
+evaluator_precisao_label = MulticlassClassificationEvaluator(labelCol = "indexedLabel", predictionCol = "prediction", metricName = "precisionByLabel")
+precisao_label = evaluator_precisao_label.evaluate(predicao)
+
+# Precisão
+evaluator_precisao_ponderada = MulticlassClassificationEvaluator(labelCol = "indexedLabel", predictionCol = "prediction", metricName = "weightedPrecision")
+precisao_ponderada = evaluator_precisao_ponderada.evaluate(predicao)
 
 # Recall
-evaluator_recall = MulticlassClassificationEvaluator(labelCol = "indexedLabel", predictionCol = "prediction", metricName = "recall")
-recall = evaluator_recall.evaluate(predicao)
+evaluator_recall_label = MulticlassClassificationEvaluator(labelCol = "indexedLabel", predictionCol = "prediction", metricName = "recallByLabel")
+recall_label = evaluator_recall_label.evaluate(predicao)
+
+# Recall
+evaluator_recall_ponderado = MulticlassClassificationEvaluator(labelCol = "indexedLabel", predictionCol = "prediction", metricName = "weightedRecall")
+recall_ponderado = evaluator_recall_ponderado.evaluate(predicao)
 
 
 #########################################################################################
@@ -72,9 +80,9 @@ recall = evaluator_recall.evaluate(predicao)
 #########################################################################################
 #salva o modelo rf
 #modelo.save(f"/projeto/modelo_rf")
-modelo.save(f"hdfs://master:8020/bigdata/modelo_rf2")
+modelo.save(f"hdfs://master:8020/bigdata/modelo_rf")
 
 #salva as métricas
 arquivo = open("projeto/metricas.txt", "w")
-arquivo.write(f"acucacia,f1,precisao,recall\n{acuracia},{f1},{precisao},{recall}")
+arquivo.write(f"acucacia,f1,precisao_label,precisao_ponderada,recall_label,recall_ponderado\n{acuracia},{f1},{precisao_label},{precisao_ponderada},{recall_label},{recall_ponderado}")
 arquivo.close()

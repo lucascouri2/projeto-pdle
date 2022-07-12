@@ -34,7 +34,7 @@ label_indexador = StringIndexer(inputCol = "label", outputCol = "indexedLabel").
 treino, teste = pt7_parquet.randomSplit(weights = [0.7, 0.3], seed = SEED)
 
 # modelo Random Forest
-rf = RandomForestClassifier(labelCol = "indexedLabel", featuresCol = "features", numTrees = 5)
+rf = RandomForestClassifier(labelCol = "indexedLabel", featuresCol = "features", numTrees = 10, maxDepth = 5)
 
 # Converte as labels int de volta ao original
 label_conversor = IndexToString(inputCol = "prediction", outputCol = "predictedLabel", labels = label_indexador.labels)

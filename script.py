@@ -32,7 +32,7 @@ a, b = pt7_parquet.randomSplit(weights = [0.01, 0.3], seed = SEED)
 treino, teste = a.randomSplit(weights = [0.7, 0.3], seed = SEED)
 
 # modelo Random Forest
-rf = RandomForestClassifier(labelCol = "indexedLabel", featuresCol = "features", numTrees = 10)
+rf = RandomForestClassifier(labelCol = "indexedLabel", featuresCol = "features", numTrees = 5)
 
 # Converte as labels int de volta ao original
 label_conversor = IndexToString(inputCol = "prediction", outputCol = "predictedLabel", labels = label_indexador.labels)
@@ -58,11 +58,11 @@ acuracia = avaliador_acuracia.evaluate(predicao)
 evaluator_f1 = MulticlassClassificationEvaluator(labelCol = "indexedLabel", predictionCol = "prediction", metricName = "f1")
 f1 = evaluator_f1.evaluate(predicao)
 
-# F1
+# Precisão
 evaluator_precisao = MulticlassClassificationEvaluator(labelCol = "indexedLabel", predictionCol = "prediction", metricName = "precision")
 precisao = evaluator_precisao.evaluate(predicao)
 
-# F1
+# Recall
 evaluator_recall = MulticlassClassificationEvaluator(labelCol = "indexedLabel", predictionCol = "prediction", metricName = "recall")
 recall = evaluator_recall.evaluate(predicao)
 

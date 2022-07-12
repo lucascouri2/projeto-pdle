@@ -4,11 +4,6 @@
 # 	Lucas Natan Correia Couri - lncc2@cin.ufpe.br   									#
 #########################################################################################
 
-#from pyspark.context import SparkContext
-#from pyspark.sql.session import SparkSession
-#sc = SparkContext('local')
-#spark = SparkSession(sc)
-
 #########################################################################################
 # Bibliotecas																			#
 #########################################################################################
@@ -62,6 +57,14 @@ acuracia = avaliador_acuracia.evaluate(predicao)
 evaluator_f1 = MulticlassClassificationEvaluator(labelCol = "indexedLabel", predictionCol = "prediction", metricName = "f1")
 f1 = evaluator_f1.evaluate(predicao)
 
+# F1
+evaluator_precisao = MulticlassClassificationEvaluator(labelCol = "indexedLabel", predictionCol = "prediction", metricName = "precision")
+precisao = evaluator_precisao.evaluate(predicao)
+
+# F1
+evaluator_recall = MulticlassClassificationEvaluator(labelCol = "indexedLabel", predictionCol = "prediction", metricName = "recall")
+recall = evaluator_recall.evaluate(predicao)
+
 
 #########################################################################################
 # Salva o modelo_rf e as métricas de avaliação											#
@@ -72,5 +75,5 @@ modelo.save(f"hdfs://master:8020/bigdata/modelo_rf2")
 
 #salva as métricas
 arquivo = open("projeto/metricas.txt", "w")
-arquivo.write(f"acucacia,f1\n{acuracia},{f1}")
+arquivo.write(f"acucacia,f1,precisao,recall\n{acuracia},{f1},{precisao},{recall}")
 arquivo.close()

@@ -28,8 +28,10 @@ pt7_parquet = spark.read.format("parquet").load(f"/bigdata/pt7-hash.parquet")
 label_indexador = StringIndexer(inputCol = "label", outputCol = "indexedLabel").fit(pt7_parquet)
 
 # Divide o dataset em treino e teste
-a, b = pt7_parquet.randomSplit(weights = [0.01, 0.3], seed = SEED)
-treino, teste = a.randomSplit(weights = [0.7, 0.3], seed = SEED)
+#a, b = pt7_parquet.randomSplit(weights = [0.01, 0.3], seed = SEED)
+#treino, teste = a.randomSplit(weights = [0.7, 0.3], seed = SEED)
+
+treino, teste = pt7_parquet.randomSplit(weights = [0.7, 0.3], seed = SEED)
 
 # modelo Random Forest
 rf = RandomForestClassifier(labelCol = "indexedLabel", featuresCol = "features", numTrees = 5)

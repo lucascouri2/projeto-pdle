@@ -1,5 +1,12 @@
 # Projeto-pdle
 Repositório destinado a realização do projeto final da disciplina de Processamento de Dados em Larga Escala da Residência em Engenharia e Ciência de Dados da UFPE/Samsung em parceria com o SiDi.
 
-## Descrição do modelo Random Forest
-O Random Forest é um método de aprendizado ensemble que pode ser utilizado tanto para regressão como para classificação, ele constroi coleções de árvores de decisão no processo de aprendizado de forma a obter melhor desempenho que cada árvore de decisão poderia oferecer individualmente. No caso da classificação, como o problema abordado neste projeto, o resultado do random forest é a classe selecionada pela maioria das árvores de decisão. O método é bastante utilizado devido a sua flexibilidade, que permite trabalhar com problemas de regressão e classificação com desempenho satisfatório, outro ponto é a facilidade para determinar a importância das features e suas contribuições para o modelo. Apesar de muitas vantagens o método geralmente é bem custoso, visto que está construindo muitas árvores de decisão por trás e isso pode ser problemático em conjuntos de dados maiores.
+## Equipe
+Laianna da Silva
+Lucas Couri
+Priscilla de Lima
+
+## Conteúdo do repositório
+- README.pdf (Descrição do modelo escolhido e instruções passo a passo para execução no cluster)
+- script.py (Código-fonte)
+- resultados/.../metricas.txt (Métricas acurácia, precision, recall, f1 do modelo sobre os dados de teste)
